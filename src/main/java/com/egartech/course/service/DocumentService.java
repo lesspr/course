@@ -1,0 +1,40 @@
+package com.egartech.course.service;
+
+import com.egartech.course.model.Document;
+import com.egartech.course.repository.DocumentRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class DocumentService {
+    private final DocumentRepository documentRepository;
+
+    public List<Document> listDocuments() {
+        return documentRepository.findAll();
+    }
+
+    public List<Document> listSearchDocuments(String title) {
+        if (title != null){
+            title = "%" + title.toLowerCase() + "%";
+        }
+        return documentRepository.findByTitleDocument(title);
+    }
+
+    public void saveDocument(Document document) {
+        log.info("Saving new {}", document);
+        documentRepository.save(document);
+    }
+
+    public void deleteDocument(Long id) {
+        documentRepository.deleteById(id);
+    }
+
+    public Document getDocumentById(Long id) {
+        return documentRepository.findById(id).orElse(null);
+    }
+}
