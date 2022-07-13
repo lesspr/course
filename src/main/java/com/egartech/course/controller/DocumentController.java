@@ -22,8 +22,10 @@ public class DocumentController {
     }
 
     @GetMapping("/document/search")
-    public String searchDocuments(@RequestParam(name = "title", required = false) String title, Model model) {
-        model.addAttribute("documents", documentService.listSearchDocuments(title));
+    public String searchDocuments(@RequestParam(name = "title", required = false) String title,
+                                  @RequestParam(name = "numeral", required = false) String numeral, Model model) {
+
+        model.addAttribute("documents", documentService.listSearchDocuments2(title, numeral));
         return "documents";
     }
 

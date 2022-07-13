@@ -25,6 +25,14 @@ public class DocumentService {
         return documentRepository.findByTitleDocument(title);
     }
 
+    public List<Document> listSearchDocuments2(String title, String numeral) {
+        if (title != null && numeral !=null) {
+            title = "%" + title.toLowerCase() + "%";
+            numeral = "%" + numeral.toLowerCase() + "%";
+        }
+        return documentRepository.findByTitleDocument2(title, numeral);
+    }
+
     public void saveDocument(Document document) {
         log.info("Saving new {}", document);
         documentRepository.save(document);

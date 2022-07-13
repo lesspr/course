@@ -16,4 +16,6 @@
         <input type="submit" value="Удалить документ"/>
     </form>
 </body>
+<br><br>
+<a href="http://localhost:8080/">На главную</a>
 </html>
