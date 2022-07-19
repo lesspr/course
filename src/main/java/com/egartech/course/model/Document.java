@@ -1,15 +1,11 @@
 package com.egartech.course.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "documents")
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Document {
     @Id
@@ -40,6 +36,17 @@ public class Document {
      */
     @Column(name = "description", columnDefinition = "text")
     private String description;
+
+    /**
+     * Тип документа удостоверяющего личность
+     */
+    @JoinColumn(name = "type_code", referencedColumnName = "code", foreignKey = @ForeignKey(name = "type_code_key"))
+    @ManyToOne
+    private PersonDocType typeCode;
+
+    @ManyToOne()
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person person;
 }
 
 
