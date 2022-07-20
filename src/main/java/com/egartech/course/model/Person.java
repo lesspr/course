@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,7 +22,9 @@ public class Person {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotBlank(message = "Обязательное поле")
     @Column(name = "first_name", length = 150)
+    @Size(min = 10, max = 100, message = "Введите название, минимум 10 символов, максимум 150")
     private String firstName;
 
     @Column(name = "last_name", length = 150)
@@ -46,5 +50,9 @@ public class Person {
     public enum GenderType {
         FEMALEE             {@Override public String toString() { return  "женский";}},   // 0
         MALE                {@Override public String toString() { return  "мужской";}}    // 1
+    }
+
+    public String getFullName(){
+        return lastName + " " + firstName + " " + middleName ;
     }
 }

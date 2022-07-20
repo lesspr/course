@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="parts/header :: head"></div>
+<!-- --------------------------------------------------------------- -->
+<body>
+<header th:insert="parts/menu :: navbar"></header>
+
+<h3 class="text-center lh-base p-4 mt-5">Реестр документов</h3>
+
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <th>УИ документа</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Серия</th>
+            <th>Номер</th>
+            <th>Тип документа</th>
+            <th></th>
+        </tr>
+        <tr th:each="item : ${listDocuments}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.person.lastName }"></td>
+            <td th:text="${item.person.firstName}"></td>
+            <td th:text="${item.person.middleName}"></td>
+            <td th:text="${item.series}"></td>
+            <td th:text="${item.numeral}"></td>
+            <td th:text="${item.typeCode.name}"></td>
+            <td><a th:href="@{/document/{id}(id=${item.id})}">Подробнее..</a> </td>
+        </tr>
+    </table>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+<!-- --------------------------------------------------------------- -->
+</html>

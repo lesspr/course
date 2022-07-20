@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html>
+<div th:insert="parts/header :: head"></div>
+<!-- --------------------------------------------------------------- -->
+<body>
+<header th:insert="parts/menu :: navbar"></header>
+
+<h3 class="text-center lh-base p-4 mt-5">Подробная информация о клиенте</h3>
+
+
+<div class="container">
+    <p><b>Идентификатор клиента: </b><span th:text="${client.id}"></span></p>
+    <p><b>Имя: </b><span th:text="${client.person.firstName}"></span></p>
+    <p><b>Название документа: </b><span th:text="${client.person.firstName}"></span></p>
+    <p><b>Серия: </b><span th:text="${client.person.lastName}"></span></p>
+
+    <hr>
+    <form action="#" th:action="@{'/client/delete/' + ${client.id}}" method="post">
+        <input type="submit" value="Удалить клиента"/>
+    </form>
+
+
+    <h4 class="text-center lh-base p-4 mt-5">Документы</h4>
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <th>Серия</th>
+                <th>Номер</th>
+                <th>Тип документа</th>
+                <th></th>
+            </tr>
+            <tr th:each="item : ${client.person.documents}">
+                <td th:text="${item.series}"></td>
+                <td th:text="${item.numeral}"></td>
+                <td th:text="${item.typeCode.name}"></td>
+                <td><a th:href="@{/document/{id}(id=${item.id})}">Подробнее..</a> </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <h4 class="text-center lh-base p-4 mt-5">Счета</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>Серия</th>
+            <th>Номер счета</th>
+            <th>Баланс</th>
+
+        </tr>
+        <tr th:each="ac : ${client.accounts}">
+            <td th:text="${ac.id}"></td>
+            <td th:text="${ac.accountNumber}"></td>
+            <td th:text="${ac.balance}"></td>
+
+        </tr>
+    </table>
+
+</div>
+
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+<!-- --------------------------------------------------------------- -->
+</html>

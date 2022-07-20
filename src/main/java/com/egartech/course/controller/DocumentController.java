@@ -17,8 +17,21 @@ public class DocumentController {
 
     @GetMapping("/")
     public String documents(Model model) {
-        model.addAttribute("documents", documentService.listDocuments());
+ //       model.addAttribute("documents", documentService.listDocuments());
+        model.addAttribute("obj", new Document());
+        return "index";
+    }
+
+    @GetMapping("/document-register")
+    public String documentRegister(Model model) {
+        model.addAttribute("listDocuments", documentService.listDocuments());
         return "documents";
+    }
+
+    @GetMapping("/dict-document-type")
+    public String dictDocumentType(Model model) {
+        model.addAttribute("docsType", documentService.listDocType());
+        return "dict-doc-type";
     }
 
     @GetMapping("/document/search")
